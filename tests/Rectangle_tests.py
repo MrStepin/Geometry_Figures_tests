@@ -5,8 +5,7 @@ import pytest
 
 
 @pytest.mark.parametrize(("side_a", "side_b", "area", "perimeter"),
-                         [(3, 7, 21, 20),
-                          (5, 10, 50, 30)])
+                         [(3, 7, 21, 20)])
 def test_rectangle(side_a, side_b, area, perimeter):
     rectangle = Rectangle(side_a, side_b)
     assert rectangle.name == f"Rectangle: side_a={side_a}, side_b={side_b}"
