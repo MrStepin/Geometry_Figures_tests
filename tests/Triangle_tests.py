@@ -20,23 +20,23 @@ def test_triangle(side_a, side_b, base, area, perimeter):
 def test_triangle_negative(side_a, side_b, base, area, perimeter):
     with pytest.raises((ValueError, AssertionError)):
         triangle = Triangle(side_a, side_b, base)
-        assert triangle.name == f"Triangle: side_a={side_a}, side_b={side_b}, base={base}"
-        assert triangle.get_area == area
-        assert triangle.get_perimeter == perimeter
+        triangle.name == f"Triangle: side_a={side_a}, side_b={side_b}, base={base}"
+        triangle.get_area == area
+        triangle.get_perimeter == perimeter
 
 
-@pytest.mark.parametrize(("side_a", "side_b", "base", "side", "result"),
-                         [(2, 2, 3, 5, 26.984313483298443)])
-def test_add_area(side_a, side_b, base, side, result):
-    square = Square(side)
+@pytest.mark.parametrize(("side_a", "side_b", "base", "side_c", "side_d", "result"),
+                         [(2, 2, 3, 5, 5, 26.984313483298443)])
+def test_add_area(side_a, side_b, base, side_c, side_d, result):
+    square = Square(side_c, side_d)
     triangle = Triangle(side_a, side_b, base)
     assert triangle.add_area(square) == result
 
 
 @pytest.mark.parametrize(("side_a", "side_b", "base", "radius", "result"),
-                         [(2, 2, 3, 5, 15)])
+                         [(2, 0, 3, 5, 15)])
 def test_add_area_negative(side_a, side_b, base, radius, result):
-    with pytest.raises(AssertionError):
+    with pytest.raises(ValueError):
         triangle = Triangle(side_a, side_b, base)
         circle = Circle(radius)
-        assert circle.add_area(triangle) == result
+        circle.add_area(triangle) == result
