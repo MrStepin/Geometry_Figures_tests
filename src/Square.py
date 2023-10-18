@@ -10,5 +10,3 @@ class Square(Rectangle):
         self.side_b = side_b
         self.name = f"Square: side_a={side_a}, side_b={side_b}"
 
-
-

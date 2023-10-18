@@ -39,4 +39,3 @@ def test_add_area_negative(side_a, side_b, radius, result):
         rectangle = Rectangle(side_a, side_b)
         circle = Circle(radius)
         circle.add_area(rectangle) == result
-
