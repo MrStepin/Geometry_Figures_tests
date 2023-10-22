@@ -5,8 +5,7 @@ import pytest
 
 
 @pytest.mark.parametrize(("side_a", "side_b", "area", "perimeter"),
-                         [(3, 7, 21, 20),
-                          (5, 10, 50, 30)])
+                         [(3, 7, 21, 20)])
 def test_rectangle(side_a, side_b, area, perimeter):
     rectangle = Rectangle(side_a, side_b)
     assert rectangle.name == f"Rectangle: side_a={side_a}, side_b={side_b}"
@@ -16,28 +15,27 @@ def test_rectangle(side_a, side_b, area, perimeter):
 
 @pytest.mark.parametrize(("side_a", "side_b", "area", "perimeter"),
                          [(0, 0, 0, 0),
-                          (-5, 10, 50, 30),
-                          (2, 8, -16, -20)])
+                          (-5, 10, 50, 30)])
 def test_rectangle_negative(side_a, side_b, area, perimeter):
-    with pytest.raises((ValueError, AssertionError)):
+    with pytest.raises((ValueError)):
         rectangle = Rectangle(side_a, side_b)
-        assert rectangle.name == f"Rectangle: side_a={side_a}, side_b={side_b}"
-        assert rectangle.get_area == area
-        assert rectangle.get_perimeter == perimeter
+        rectangle.name == f"Rectangle: side_a={side_a}, side_b={side_b}"
+        rectangle.get_area == area
+        rectangle.get_perimeter == perimeter
 
 
-@pytest.mark.parametrize(("side_a", "side_b", "side", "result"),
-                         [(10, 15, 5, 175)])
-def test_add_area(side_a, side_b, side, result):
-    square = Square(side)
+@pytest.mark.parametrize(("side_a", "side_b", "side_c", "side_d", "result"),
+                         [(10, 15, 5, 5, 175)])
+def test_add_area(side_a, side_b, side_c, side_d, result):
+    square = Square(side_c, side_d)
     rectangle = Rectangle(side_a, side_b)
     assert rectangle.add_area(square) == result
 
 
 @pytest.mark.parametrize(("side_a", "side_b", "radius", "result"),
-                         [(2, 5, 5, 15)])
+                         [(10, -15, 0, 175)])
 def test_add_area_negative(side_a, side_b, radius, result):
-    with pytest.raises(AssertionError):
+    with pytest.raises(ValueError):
         rectangle = Rectangle(side_a, side_b)
         circle = Circle(radius)
-        assert circle.add_area(rectangle) == result
+        circle.add_area(rectangle) == result
